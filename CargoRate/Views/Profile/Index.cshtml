@@ -1,0 +1,31 @@
+﻿@model User
+
+@{
+    ViewBag.Title = "Личный кабинет";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Личный кабинет</h1>
+    <h2>Здравствуйте, @Model.Name @Model.LastName</h2>
+
+    <h3>Личные данные</h3>
+    <p>Логин: @Model.UserName</p>
+    <p>Имя: @Model.Name</p>
+    <p>Фамилия: @Model.LastName</p>
+    <p>Компания: @Model.CompanyName</p>
+
+    <a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.Id">Редактировать личные данные</a>
+
+    <form method="post" asp-controller="Account" asp-action="Logout">
+       <br /> <input type="submit" value="Выйти" />
+    </form>
+}
+else
+{
+    @Html.ActionLink("Авторизоваться","Login","Account")
+    ;
+    <br />
+    @Html.ActionLink("Зарегестрироваться","Register","Account")
+    ;
+}

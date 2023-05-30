@@ -11,5 +11,6 @@ namespace CargoRate.Data
 
         }
 
+        public DbSet<Cargo> Cargos { get; set; }
     }
 }

@@ -5,13 +5,12 @@ using System.Xml;
 
 namespace CargoRate.Controllers
 {
-    public class XmlController : Controller
+    public class DataController : Controller
     {
         private readonly AppDbContext db;
 
-        public XmlController(AppDbContext db)
+        public DataController(AppDbContext db)
         {
-
             this.db = db;
         }
 
@@ -30,21 +29,22 @@ namespace CargoRate.Controllers
                 {
                     var doc = new XmlDocument();
                     doc.Load(file.OpenReadStream());
-                    var cargoDoc = doc.SelectNodes("//грузоперевозка"); 
+                    var cargoDoc = doc.SelectNodes("//грузоперевозка");
                     foreach (XmlNode cargo in cargoDoc)
                     {
                         var newCargo = new Cargo
                         {
-                            OrderNum = int.Parse(cargo.SelectSingleNode("номер_заказа").InnerText),
-                            Start = cargo.SelectSingleNode("отправитель").InnerText,
-                            End = cargo.SelectSingleNode("получатель").InnerText
+                            DeparturePoint = cargo.SelectSingleNode("отправитель").InnerText,
+                            ArrivalPoint = cargo.SelectSingleNode("получатель").InnerText,
+                            Price=3142m,
+                            TrailerType="default"
                         };
                         db.Cargos.Add(newCargo);
                     }
 
                     await db.SaveChangesAsync();
 
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (Exception ex)
                 {

@@ -54,6 +54,22 @@ namespace CargoRate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cargos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DeparturePoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArrivalPoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrailerType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cargos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -216,6 +232,9 @@ namespace CargoRate.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Cargos");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

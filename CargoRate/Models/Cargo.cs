@@ -4,8 +4,9 @@ namespace CargoRate.Models
     public class Cargo
     {
         public int Id { get; set; }
-        public int OrderNum { get; set; }
-        public string Start { get; set; }
-        public string End { get; set; }
+        public string DeparturePoint { get; set; }
+        public string ArrivalPoint { get; set; }
+        public string TrailerType { get; set; }
+        public decimal Price { get; set; }
     }
 }

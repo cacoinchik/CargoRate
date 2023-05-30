@@ -30,14 +30,18 @@ namespace CargoRate.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("End")
+                    b.Property<string>("ArrivalPoint")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderNum")
-                        .HasColumnType("int");
+                    b.Property<string>("DeparturePoint")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Start")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TrailerType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

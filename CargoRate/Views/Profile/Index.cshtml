@@ -18,14 +18,18 @@
     <a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.Id">Редактировать личные данные</a>
 
     <form method="post" asp-controller="Account" asp-action="Logout">
-       <br /> <input type="submit" value="Выйти" />
+        <br /> <input type="submit" value="Выйти" />
     </form>
 }
 else
 {
-    @Html.ActionLink("Авторизоваться","Login","Account")
-    ;
-    <br />
-    @Html.ActionLink("Зарегестрироваться","Register","Account")
-    ;
+    <article id="main">
+        <header>
+            <ul class="actions stacked">
+                <li><a asp-controller="Account" asp-action="Login" class="button fit primary">Авторизоваться</a></li>
+                <li><a asp-controller="Account" asp-action="Register" class="button fit primary">Регистрация</a></li>
+            </ul>
+        </header>
+    </article>
+
 }

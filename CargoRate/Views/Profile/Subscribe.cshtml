@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Rate>
+
+<article id="main">
+    <header>
+        <h2>Оформление подписки</h2>
+    </header>
+    <section class="wrapper style5">
+        <div class="inner">
+            <ul class="features" style="text-align: center">
+                @foreach (var rate in Model)
+                {
+                    <li>
+                        <h3>@rate.Name</h3>
+                        <p>Длительность(месяцев):@rate.Duration</p>
+                        <p>Цена: @rate.Price рублей</p>
+                    </li>
+                }
+            </ul>
+        </div>
+        <ul class="features" style="text-align:center">
+            <li>
+                <form method="post" asp-controller="Profile" asp-action="Subscribe">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <select id="demo-category" name="selectedRate">
+                            @foreach (var item in Model)
+                            {
+                                <option>@item.Name</option>
+                            }
+                        </select>
+                    </div> <br />
+                    <div>
+                        <label>Дата начала подписки: @DateTime.Now.ToString("dd.MM.yyyy")</label>
+                    </div>
+                    <input type="submit" value="Оплатить"/>
+                </form>
+
+            </li>
+        </ul>
+    </section>
+</article>

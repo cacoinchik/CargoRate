@@ -7,6 +7,5 @@ namespace CargoRate.Models
         public string ArrivalPoint { get; set; }
         public string TrailerType { get; set; }
         public decimal? Price { get; set; }
-        public string? Here { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace CargoRate.Data
         }
 
         public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Rate> Rates { get; set; }
     }
 }

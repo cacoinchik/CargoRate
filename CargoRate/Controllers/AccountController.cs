@@ -34,9 +34,12 @@ namespace CargoRate.Controllers
                     CompanyName = model.CompanyName
                 };
 
+
+
                 var result= await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await userManager.AddToRoleAsync(user, "user");
                     await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Profile");
                 }

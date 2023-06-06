@@ -1,9 +1,11 @@
 ﻿using CargoRate.Data;
 using CargoRate.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CargoRate.Controllers
 {
+    [Authorize]
     public class RequestController : Controller
     {
         private readonly AppDbContext db;

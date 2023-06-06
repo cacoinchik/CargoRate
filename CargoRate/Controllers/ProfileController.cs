@@ -21,7 +21,10 @@ namespace CargoRate.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View(await db.Users.FirstOrDefaultAsync(u=>u.UserName==User.Identity.Name));
+                ProfileModels models = new ProfileModels();
+                models.User=await db.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+                models.Subscription=await db.Subscriptions.FirstOrDefaultAsync(s=>s.UserName==models.User.UserName);
+                return View(models);
             }
             else
             {
@@ -73,5 +76,46 @@ namespace CargoRate.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Subscribe()
+        {
+            return View(await db.Rates.ToListAsync());
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Subscribe(string selectedRate)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var sub = new Subscription
+                    {
+                        UserName = User.Identity.Name,
+                        Status = "Активен",
+                        StartDate = DateTime.Now,
+                        RateId=db.Rates.FirstOrDefault(n=>n.Name==selectedRate).Id
+                    };
+                    sub.EndDate = sub.StartDate.AddMonths(db.Rates.FirstOrDefault(d => d.Id == sub.RateId).Duration);
+
+                    await db.Subscriptions.AddAsync(sub);
+                    await db.SaveChangesAsync();
+
+                    return RedirectToAction("Info", "Profile");
+                }catch (Exception ex)
+                {
+
+                }
+            }
+            return View();
+        }
+
+        public IActionResult Info()
+        {
+            return View();
+        }
+
     }
 }

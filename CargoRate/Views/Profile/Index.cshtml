@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model ProfileModels
 
 @{
     ViewBag.Title = "Личный кабинет";
@@ -6,20 +6,36 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <h1>Личный кабинет</h1>
-    <h2>Здравствуйте, @Model.Name @Model.LastName</h2>
-
-    <h3>Личные данные</h3>
-    <p>Логин: @Model.UserName</p>
-    <p>Имя: @Model.Name</p>
-    <p>Фамилия: @Model.LastName</p>
-    <p>Компания: @Model.CompanyName</p>
-
-    <a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.Id">Редактировать личные данные</a>
-
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <br /> <input type="submit" value="Выйти" />
-    </form>
+    <article id="main">
+        <header>
+            <h2>Здравствуйте, @Model.User.Name @Model.User.LastName</h2>
+            <a asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.User.Id">Редактировать личные данные</a>
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <br /> <input type="submit" value="Выйти" />
+            </form>
+        </header>
+        <section class="wrapper style5">
+            <div class="inner">
+                <ul class="features" style="text-align: center">
+                    <li>
+                        <h3>Личные данные</h3>
+                        <p>Логин: @Model.User.UserName</p>
+                        <p>Имя: @Model.User.Name</p>
+                        <p>Фамилия: @Model.User.LastName</p>
+                        <p>Компания: @Model.User.CompanyName</p>
+                    </li>
+                    <li>
+                        <h2>Подписка</h2>
+                        @if (Model.Subscription != null)
+                        {
+                            <p>Статус: @Model.Subscription.Status</p>
+                            <p>Дата окончания: @Model.Subscription.EndDate.ToString("dd.MM.yyy")</p>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </article>
 }
 else
 {

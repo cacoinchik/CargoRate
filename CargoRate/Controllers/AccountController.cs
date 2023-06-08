@@ -1,4 +1,4 @@
-﻿using CargoRate.Models;
+﻿ using CargoRate.Models;
 using CargoRate.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

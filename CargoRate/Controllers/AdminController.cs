@@ -59,11 +59,9 @@ namespace CargoRate.Controllers
 
         public async Task<IActionResult> Edit(string userId)
         {
-            // получаем пользователя
             User user = await userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                // получем список ролей пользователя
                 var userRoles = await userManager.GetRolesAsync(user);
                 var allRoles = roleManager.Roles.ToList();
                 ChangeRoleViewModel model = new ChangeRoleViewModel
@@ -81,17 +79,12 @@ namespace CargoRate.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
-            // получаем пользователя
             User user = await userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                // получем список ролей пользователя
                 var userRoles = await userManager.GetRolesAsync(user);
-                // получаем все роли
                 var allRoles = roleManager.Roles.ToList();
-                // получаем список ролей, которые были добавлены
                 var addedRoles = roles.Except(userRoles);
-                // получаем роли, которые были удалены
                 var removedRoles = userRoles.Except(roles);
 
                 await userManager.AddToRolesAsync(user, addedRoles);

@@ -23,7 +23,7 @@ namespace CargoRate.Controllers
             {
                 ProfileModels models = new ProfileModels();
                 models.User=await db.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
-                models.Subscription=await db.Subscriptions.FirstOrDefaultAsync(s=>s.UserName==models.User.UserName);
+                models.Subscription=await db.Subscriptions.FirstOrDefaultAsync(s=>s.UserName==models.User.UserName && s.Status=="Активен");
                 return View(models);
             }
             else

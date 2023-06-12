@@ -37,5 +37,21 @@ namespace CargoRate.Service
                 return new GeoCoordinates { Latitude=0,Longitude=0};
             }
         }
+
+        public GeoCoordinatesParameter GetGeoCoordinatesParameter(GeoCoordinates coordinates)
+        {
+            var radius = 100000;
+            var earthRadius = 6371;
+
+            var latDistance = (radius / 1000.0) / earthRadius;
+            var lngDistance = latDistance / Math.Cos(coordinates.Latitude * Math.PI / 180);
+
+            var minLat = coordinates.Latitude - (latDistance * 180 / Math.PI);
+            var maxLat = coordinates.Latitude + (latDistance * 180 / Math.PI);
+            var minLon = coordinates.Longitude - (lngDistance * 180 / Math.PI);
+            var maxLon = coordinates.Longitude + (lngDistance * 180 / Math.PI);
+
+            return new GeoCoordinatesParameter { maxLat = maxLat, minLat = minLat, maxLon = maxLon, minLon=minLon };
+        }
     }
 }

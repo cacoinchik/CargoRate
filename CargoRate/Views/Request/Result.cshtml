@@ -1,7 +1,3 @@
-﻿@model List<Cargo>
+﻿@model UserCargoDataModel
 
-<p>Hello</p>
-
-@foreach(var i in Model){
-    <p>@i.DeparturePoint</p>
-}
+<p>Hello @Model.DeparturePoint @Model.ArrivalPoint @Model.TrailerType @Model.Price</p>

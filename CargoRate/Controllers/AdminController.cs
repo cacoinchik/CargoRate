@@ -23,6 +23,7 @@ namespace CargoRate.Controllers
         public IActionResult Index() => View(roleManager.Roles.ToList());
 
         public IActionResult Create() => View();
+
         [HttpPost]
         public async Task<IActionResult> Create(string name)
         {

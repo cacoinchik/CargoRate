@@ -1,24 +1,37 @@
 ﻿@model UserCargoDataModel
 
-<h2>Расчёт средней стоимости</h2>
 
-<form method="post" asp-controller="Request" asp-action="Index">
+<article id="main">
+    <header>
+        <h2>Расчёт средней стоимости</h2>
+    </header>
+    <section class="wrapper style5">
+        <ul class="features" style="text-align:center">
+            <li>
+                <form method="post" asp-controller="Request" asp-action="Index">
 
-    <div>
-        <label>Пункт отправления</label>
-        <input asp-for="DeparturePoint"/>
-    </div>
+                    <div>
+                        <label>Пункт отправления</label>
+                        <input asp-for="DeparturePoint" />
+                    </div>
 
-    <div>
-        <label>Пукнт прибытия</label>
-        <input asp-for="ArrivalPoint"/>
-    </div>
+                    <div>
+                        <label>Пукнт прибытия</label>
+                        <input asp-for="ArrivalPoint" />
+                    </div>
 
-    <div>
-        <label>Тип прицепа</label>
-        <input asp-for="TrailerType"/>
-    </div>
+                    <div>
+                        <label>Тип прицепа</label>
+                        <select asp-for="TrailerType">
+                            <option>Тент</option>
+                            <option>Рефрижератор</option>
+                        </select>
+                    </div> <br />
 
-    <button type="submit">Вычислить</button>
+                    <button type="submit">Вычислить</button>
+                </form>
+            </li>
+        </ul>
+    </section>
+</article>
 
-</form>
